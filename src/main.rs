@@ -34,7 +34,11 @@ fn search(target: &str, location: &str, args: Vec<String>, mut count: i32) -> Re
     for arg in args.clone() {
         let narg:Vec<char> = arg.chars().collect();
         if narg[1] == 'm' && narg[2] == 'a' && narg[3] == 'x' {
-            maxcount = narg[4].to_digit(10).unwrap() as i32;
+            if narg.len() > 5 {
+                maxcount = narg[4].to_digit(10).unwrap() as i32 * 10 + narg[5].to_digit(10).unwrap() as i32
+            } else {
+                maxcount = narg[4].to_digit(10).unwrap() as i32;
+            }
         }
     }
 
