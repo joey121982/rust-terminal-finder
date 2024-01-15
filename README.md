@@ -1,6 +1,6 @@
 # rust-terminal-finder
 
-## Version 0.2.0
+## Version 0.2.1
 
 Command line program that finds a specific file/folder and displays its location. written in rust.
 
@@ -11,3 +11,5 @@ Command line program that finds a specific file/folder and displays its location
     --name (or -n) \<NAME> <br>
     --location (or -l) \<LOCATION> (OPTIONAL, if not specified, goes to default)<br>
     ^ current default is ```/home```<br>
+
+### NOTE: as of 0.2.1, the program uses tokio async to speed up the process.
