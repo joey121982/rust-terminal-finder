@@ -6,13 +6,13 @@ use tokio::task;
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    /// Type of either File(fi) or Folder(fo)
-    #[arg(short, long)]
-    ftype: Option<String>,
-
     /// File/Folder to search for
     #[arg(short, long)]
     name: String,
+    
+    /// Type of either File(fi) or Folder(fo)
+    #[arg(short, long)]
+    ftype: Option<String>,
 
     /// Starting location from where to search
     #[arg(short, long)]
