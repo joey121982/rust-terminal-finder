@@ -8,7 +8,7 @@ use tokio::task;
 struct Args {
     /// Type of either File(fi) or Folder(fo)
     #[arg(short, long)]
-    ftype: String,
+    ftype: Option<String>,
 
     /// File/Folder to search for
     #[arg(short, long)]
@@ -24,7 +24,9 @@ async fn main() {
     let default_location: String = "/home".to_string();
     let args = Args::parse();
     let location: &str = &args.location.unwrap_or(default_location);
-    search(&args.name, &args.ftype, location).await;
+
+    let rftype: &str = &args.ftype.unwrap_or("all".to_string());
+    search(&args.name, &rftype, location).await;
 }
 
 async fn search(target: &str, ftype: &str, location: &str) {
@@ -64,7 +66,7 @@ async fn search_in_directory(target: &str, ftype: &str, location: &str) {
         if path.file_name().unwrap() == target {
             println!("Found instance at: {}", location);
         }
-        if ftype == "fo" && path.is_dir() {
+        if ( ftype == "fo" || ftype == "all" ) && path.is_dir() {
             search_in_directory(target, ftype, path.to_str().unwrap()).await;
         }
     }
